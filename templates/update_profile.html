@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Update Profile</h3>
+
+<div class="dashboard-card">
+
+<form method="POST">
+
+<div class="mb-3">
+<label>Username</label>
+<input type="text" name="username" class="form-control" value="{{ user.username }}" required>
+</div>
+
+<button class="btn btn-primary">Update Profile</button>
+
+</form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Admin Settings</h2>
+<p>System configuration will appear here.</p>
+<h3 class="mb-3">Settings</h3>
+<p>Manage your account settings and preferences.</p>
+
+<div class="dashboard-card">
+
+<ul class="list-group">
+
+<li class="list-group-item">
+<a href="{{ url_for('change_password') }}" class="text-decoration-none">
+<i class="bi bi-key"></i> Change Password
+</a>
+</li>
+
+<li class="list-group-item">
+<a href="{{ url_for('update_profile') }}" class="text-decoration-none">
+<i class="bi bi-person"></i> Update Profile
+</a>
+</li>
+
+<li class="list-group-item">
+<a href="{{ url_for('system_preferences') }}" class="text-decoration-none">
+<i class="bi bi-gear"></i> System Preferences
+</a>
+</li>
+
+</ul>
+
+</div>
+
+{% endblock %}

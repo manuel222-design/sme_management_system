@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3 class="mb-4">Search Results</h3>
+
+<div class="dashboard-card">
+
+{% if results %}
+
+<table class="table">
+
+<thead>
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Stock</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for product in results %}
+
+<tr>
+<td>{{ product.name }}</td>
+<td>{{ product.selling_price }}</td>
+<td>{{ product.quantity }}</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+{% else %}
+
+<p class="text-muted">
+No product found for "<strong>{{ query }}</strong>"
+</p>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

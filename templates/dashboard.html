@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if low_stock %}
+<div class="alert alert-warning">
+    <h5>⚠ Low Stock Alert</h5>
+    <ul>
+        {% for product in low_stock %}
+        <li>
+            {{ product.name }} is running low ({{ product.quantity }} remaining)
+        </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+{% endif %}
+<div class="mb-4">
+    <h2 class="fw-semibold mb-1">Dashboard</h2>
+    <p class="text-muted small">Welcome back. Here's an overview of your business.</p>
+</div>
+
+
+<div class="row g-4">
+
+    <!-- Total Products -->
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="text-muted small mb-1">Total Products</p>
+                    <h4 class="fw-semibold mb-0">{{ total_products }}</h4>
+                </div>
+                <div class="icon-circle bg-info-subtle text-info">
+                    <i class="bi bi-box-seam fs-5"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Sales -->
+<div class="col-md-3">
+    <div class="dashboard-card">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <p class="text-muted small mb-1">Total Sales</p>
+                <h4 class="fw-semibold mb-0">Ksh {{ "%.2f"|format(total_sales) }}</h4>
+            </div>
+            <div class="icon-circle bg-primary-subtle text-primary">
+                <i class="bi bi-cash-stack fs-5"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% if show_financials %}
+    <!-- Total Expenses -->
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="text-muted small mb-1">Total Expenses</p>
+                    <h4 class="fw-semibold mb-0">Ksh {{ "%.2f"|format(total_expenses) }}</h4>
+                </div>
+                <div class="icon-circle bg-danger-subtle text-danger">
+                    <i class="bi bi-receipt fs-5"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if show_financials %}
+    <!-- Total Profit -->
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <p class="text-muted small mb-1">Total Profit</p>
+                    <h4 class="fw-semibold mb-0 text-success">Ksh {{ "%.2f"|format(total_profit) }}</h4>
+                </div>
+                <div class="icon-circle bg-success-subtle text-success">
+                    <i class="bi bi-graph-up fs-5"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+
+    <!-- Sales Chart -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="dashboard-card p-3">
+            <h5 class="mb-3">Sales Overview</h5>
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+</div>
+
+{% if show_financials %}
+<div class="col-md-3">
+    <div class="dashboard-card p-3 text-center">
+        <h6>Today's Profit</h6>
+        <h4 class="text-success">
+            Ksh {{ "%.2f"|format(today_profit) }}
+        </h4>
+    </div>
+</div>
+{% endif %}
+
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const ctx = document.getElementById('salesChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ week_labels | tojson }},
+            datasets: [{
+                label: 'Sales (Ksh)',
+                data: {{ week_sales | tojson }},
+                borderColor: '#22c55e',
+                backgroundColor: 'rgba(34,197,94,0.2)',
+                borderWidth: 3,
+                tension: 0.4,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#111'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: '#111' }
+                },
+                y: {
+                    ticks: { color: '#111' }
+                }
+            }
+        }
+    });
+
+});
+</script>
+
+
+    
+{% endblock %}

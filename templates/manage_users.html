@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>User Management</h3>
+
+<div class="dashboard-card">
+
+<table class="table table-bordered">
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Username</th>
+<th>Role</th>
+<th>Actions</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for user in users %}
+
+<tr>
+<td>{{ user.id }}</td>
+<td>{{ user.username }}</td>
+<td>
+<span class="badge 
+{% if user.role == 'admin' %}
+bg-success
+{% else %}
+bg-secondary
+{% endif %}
+">
+{{ user.role }}
+</span>
+</td>
+
+<td>
+
+<a href="{{ url_for('toggle_role', user_id=user.id) }}" 
+class="btn btn-sm btn-warning">
+Toggle Role
+</a>
+
+<a href="{{ url_for('delete_user', user_id=user.id) }}" 
+class="btn btn-sm btn-danger">
+Delete
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
