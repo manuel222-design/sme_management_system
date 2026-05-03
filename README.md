@@ -39,3 +39,23 @@ Profit = Total Sales - Total Expenses
 - AI-based sales prediction
 - Export reports (PDF/Excel)
 - Multi-user isolation
+
+ How to Run
+
+1. Clone the repository:
+git clone https://github.com/manuel222-design/sme_management_system.git
+
+2. Navigate into folder:
+cd sme-business-management-system
+
+3. Create virtual environment:
+python -m venv venv
+
+4. Activate:
+venv\Scripts\activate
+
+5. Install dependencies:
+pip install -r requirements.txt
+
+6. Run app:
+python app.py
