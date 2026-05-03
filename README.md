@@ -26,6 +26,14 @@ Profit = Total Sales - Total Expenses
 
  Screenshots
 
+ Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+ Products
+![Products](screenshots/products.png)
+
+ Sales
+![Sales](screenshots/sales.png)
 
  Future Improvements
 - AI-based sales prediction
